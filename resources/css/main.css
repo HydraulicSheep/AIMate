@@ -41,6 +41,10 @@ th {
     background-color: rgb(240, 217, 181);
 }
 
+.highlighted {
+    background-color: grey; 
+}
+
 
   ul {
     list-style-type: none;
