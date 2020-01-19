@@ -5,15 +5,37 @@
     <link rel="stylesheet" href="libraries/chessboardjs/css/chessboard-1.0.0.min.css">
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script src="libraries/chessboardjs/js/chessboard-1.0.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.2/chess.js"></script>
   </head>
+
+
   <body>
-    <div id="board1" style="width: 400px"></div>
+    <div id="myBoard" style="width: 400px" style="float: right;"></div>
     <script>
+        var board = null
+        var game = new Chess()
+        function makeRandomMove () {
+          var possibleMoves = game.moves()
+
+          // exit if the game is over
+          if (game.game_over()) return
+
+            var randomIdx = Math.floor(Math.random() * possibleMoves.length)
+            game.move(possibleMoves[randomIdx])
+            board.position(game.fen())
+
+            window.setTimeout(makeRandomMove, 500)
+        }
         var config = {
           pieceTheme: 'libraries/chessboardjs/img/chesspieces/wikipedia/{piece}.png',
           position: 'start'
         }
-        var board1 = ChessBoard('board1', config);
+        board = ChessBoard('myBoard', config);
+        window.setTimeout(makeRandomMove, 500);
+
     </script>
   </body>
+
+
+
 </html>
