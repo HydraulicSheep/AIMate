@@ -9,6 +9,12 @@ function makeRandomMove () {
         var col = document.createElement("td");
         row = document.createElement("tr")
         row.setAttribute("id","row"+turnNum.toString())
+        if (turnNum%2 ==0) {
+            row.setAttribute("class","even")
+        }
+        else {
+            row.setAttribute("class","odd")
+        }
         var node = document.createTextNode(turnNum.toString()+".");
         col.appendChild(node);
         row.appendChild(col);

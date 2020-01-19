@@ -19,13 +19,10 @@
       <li><a href="">Home</a></li>
     </ul>
     <div class="column">Bot1</div>
-    <div class="column" style="margin: auto;">
+    <div class="column" style="margin: auto;max-height: 77vh;">
         <div id="myBoard" style="width: 100%; margin: auto;"></div>
-        <div style="width: 100%; margin:auto;padding-top:2%;">
-          
-        </div>
         <script src = "resources/js/main.js"></script>
-        <table id="moves">
+        <table style="padding-top: 10px;">
           <tr>
             <th class="moveno"></th>
             <th>
@@ -38,14 +35,19 @@
             <i class="fas fa-step-forward"></i>
           </th>
           <th class="endcol"></th>
-          </tr>
+        </tr>
+      </table>
+        <div class="tablewrapper" style="overflow: auto; max-height: 20vh;">
+        <table class="odd" id="moves">
           <tr>
-            <td class="moveno"></td>
-            <td>White</td>
-            <td class = "middlecol"></td>
-            <td>Black</td>
+            <th class="moveno even"></th>
+            <th class="even">White</th>
+            <th class="even"></th>
+            <th class="even">Black</th>
+          <th class="endcol even"></th>
           </tr>
         </table>
+        </div>
     </div>
     <div class="column">Bot2</div>
     
