@@ -34,11 +34,11 @@ th {
 }
 
 .even {
-    background-color: wheat;
+    background-color: rgb(181, 136, 99);
 }
 
 .odd {
-    background-color: whitesmoke;
+    background-color: rgb(240, 217, 181);
 }
 
 

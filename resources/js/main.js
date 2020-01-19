@@ -1,6 +1,19 @@
 var board = null
 var game = new Chess()
+var run = true;
+function pause () {
+    if (run) {
+        run = false;
+    }
+    else {
+        run = true;
+        makeRandomMove();
+    }
+    
+}
+
 function makeRandomMove () {
+    if (run) {
     var history = game.history();
     var possibleMoves = game.moves();
     var turnNum = Math.floor(history.length/2)+1;
@@ -40,8 +53,11 @@ function makeRandomMove () {
     }
     var movetable = document.getElementById("moves")
     movetable.appendChild(row)
-
     window.setTimeout(makeRandomMove, 500)
+    
+        
+    }
+    
 }
     var config = {
         pieceTheme: 'libraries/chessboardjs/img/chesspieces/wikipedia/{piece}.png',
