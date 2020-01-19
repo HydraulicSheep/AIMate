@@ -4,10 +4,14 @@ var run = true;
 function pause () {
     if (run) {
         run = false;
+        var button = document.getElementById("playButton");
+        button.setAttribute("class","fas fa-play middlecol")
     }
     else {
         run = true;
         makeRandomMove();
+        var button = document.getElementById("playButton");
+        button.setAttribute("class","fas fa-pause middlecol");
     }
     
 }
