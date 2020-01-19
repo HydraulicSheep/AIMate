@@ -1,6 +1,10 @@
 var board = null
 var game = new Chess()
 var run = true;
+var displayGame = game;
+var moveStack = [];
+
+
 function pause () {
     if (run) {
         run = false;
@@ -12,6 +16,28 @@ function pause () {
         makeRandomMove();
         var button = document.getElementById("playButton");
         button.setAttribute("class","fas fa-pause middlecol");
+    }
+    
+}
+
+function stepBack () {
+    if (displayGame.history().length>0) {
+        run = false;
+        moveStack.push(displayGame.undo())
+        board.position(displayGame.fen())
+    }
+}
+
+function stepForward () {
+    if (moveStack.length>0) {
+        displayGame.move(moveStack.shift());
+        board.position(displayGame.fen())
+    }
+    else {
+        run = true;
+        makeRandomMove();
+        run = false;
+        displayGame = game;
     }
     
 }
