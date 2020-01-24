@@ -20,6 +20,8 @@ i {
 
 table {
     width: 100%;
+  border-spacing: 0;
+
 }
 th {
     width:20%

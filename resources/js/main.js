@@ -58,8 +58,9 @@ function stepForward () {
 function play() {
     if (run) {
         if (moveStack.length>0) {
-            displayGame.move(moveStack.shift());
+            displayGame.move(moveStack.pop());
             board.position(displayGame.fen())
+            console.log("Pushing move from stack");
             if (highlighted != null) {
                 highlighted.setAttribute("class","");
             }
@@ -142,11 +143,13 @@ function makeRandomMove () {
         movetable.appendChild(row)
         movetable.parentElement.scrollTop = movetable.parentElement.scrollHeight;
 }
-    var config = {
+    
+function init() {
+var config = {
         pieceTheme: 'libraries/chessboardjs/img/chesspieces/wikipedia/{piece}.png',
         position: 'start'
     }
     board = ChessBoard('myBoard', config);
     $(window).resize(board.resize);
     window.setTimeout(play, 500);
-        
+}      
