@@ -18,7 +18,13 @@
     <ul class="navbar">
       <li><a href="">Home</a></li>
     </ul>
-    <div class="column">Bot1</div>
+    <div class="column">
+      <p>
+        <select>
+          <option value="volvo">Random Bot</option>
+        </select> 
+        </p>
+    </div>
     <div class="column" style="margin: auto;max-height: 77vh;">
       <div id ="boardContainer">
         <div id="myBoard" style="width: 100%; margin: auto;">
@@ -31,13 +37,13 @@
         </div>
       </div>
         <table style="padding-top: 10px;">
-          <tr>
+          <tr class = "replayButton">
             <th class="moveno"></th>
             <th>
             <i class="fas fa-step-backward" onclick="stepBack()"></i>
             </th>
             <th>
-            <i class="fas fa-pause middlecol" id="playButton" onclick="pauseButton()" ></i>
+            <i class="fas fa-play middlecol" id="playButton" onclick="pauseButton()" ></i>
           </th>
           <th>
             <i class="fas fa-step-forward" onclick="stepForward()"></i>
@@ -57,7 +63,13 @@
         </table>
         </div>
     </div>
-    <div class="column">Bot2</div>
+    <div class="column">
+      <p>
+      <select>
+        <option value="volvo">Random Bot</option>
+      </select> 
+      </p>
+    </div>
     
   </body>
 

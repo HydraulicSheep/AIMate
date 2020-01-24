@@ -1,6 +1,6 @@
 var board = null
 var game = new Chess()
-var run = true;
+var run = false;
 var displayGame = game;
 var moveStack = [];
 var highlighted = null;
@@ -151,5 +151,4 @@ var config = {
     }
     board = ChessBoard('myBoard', config);
     $(window).resize(board.resize);
-    window.setTimeout(play, 500);
 }      
