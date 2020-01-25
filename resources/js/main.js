@@ -149,6 +149,15 @@ var config = {
         pieceTheme: 'libraries/chessboardjs/img/chesspieces/wikipedia/{piece}.png',
         position: 'start'
     }
+
     board = ChessBoard('myBoard', config);
     $(window).resize(board.resize);
-}      
+}
+
+function start() {
+    var overLay = document.getElementById("boardInfo");
+    overLay.style.display = "none";
+    var controls = document.getElementById("controls");
+    controls.style.display = "inline";
+    pauseButton();
+}
