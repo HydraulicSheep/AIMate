@@ -157,7 +157,7 @@ var config = {
 
 function start() {
     bot2 = new randomBot(game);
-    bot1 = new pushBot(game);
+    bot1 = new captureBot(game);
     var overLay = document.getElementById("boardInfo");
     overLay.style.display = "none";
     var controls = document.getElementById("controls");
