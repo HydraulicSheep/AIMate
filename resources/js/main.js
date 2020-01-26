@@ -74,11 +74,14 @@ function makeMove() {
         movetable.parentElement.scrollTop = movetable.parentElement.scrollHeight;
 
         //Requests the move from the relevant bots
-        if (turnNum%2 ==0) {
+        console.log(history.length);
+        if (history.length%2 ==0) {
+            console.log("bot 1 move");
             game = bot1.move(game);
         }
         else {
             game = bot2.move(game);
+            console.log("bot 2 move");
         }
         //Updates board graphic
         board.position(game.fen());
@@ -153,8 +156,8 @@ var config = {
 }
 
 function start() {
-    bot1 = new randomBot(game);
     bot2 = new randomBot(game);
+    bot1 = new pushBot(game);
     var overLay = document.getElementById("boardInfo");
     overLay.style.display = "none";
     var controls = document.getElementById("controls");

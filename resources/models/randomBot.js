@@ -7,10 +7,7 @@ class randomBot extends player {
     }
 
     move(game) {
-        var possibleMoves = game.moves();
-        var randomIndex = Math.floor(Math.random() * possibleMoves.length)
-        game.move(possibleMoves[randomIndex])
-        return game;  
+        return this.randomMove(game);  
     }
     
 }
