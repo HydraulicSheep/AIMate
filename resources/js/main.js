@@ -32,19 +32,7 @@ function stepBack () {
         }
         moveStack.push(displayGame.undo())
         board.position(displayGame.fen())
-        if (highlighted != null) {
-            highlighted.setAttribute("class","");
-        }
-        var history = displayGame.history();
-        var turnNum = Math.round(history.length/2);
-        var row = document.getElementById("row"+turnNum.toString());
-        if (history.length%2 ==0) {
-            highlighted = row.children[3]
-        }
-        else {
-            highlighted = row.children[1]
-        }
-        highlighted.setAttribute("class","highlighted")
+        updateHighlight(displayGame);
     }
 }
 
@@ -63,15 +51,7 @@ function play() {
             displayGame.move(moveStack.pop());
             board.position(displayGame.fen())
             console.log("Pushing move from stack");
-            var history = displayGame.history();
-            var turnNum = Math.round(history.length/2);
-            var row = document.getElementById("row"+turnNum.toString());
-            if (history.length%2 ==0) {
-                updateHighlight(row.children[3]);
-            }
-            else {
-                updateHighlight(row.children[1]);
-            }
+            updateHighlight(displayGame);
         }
         else {
             makeMove();
@@ -83,33 +63,32 @@ function play() {
 function makeMove() {
         var history = game.history();
         var turnNum = Math.floor(history.length/2)+1;
+
+        //Makes a new row for the current move if it doesn't exist.
         var row = document.getElementById("row"+turnNum.toString());
         if (row == null) {
             row = addMoveRow()
         }
-    
+        var movetable = document.getElementById("moves")
+        movetable.appendChild(row)
+        movetable.parentElement.scrollTop = movetable.parentElement.scrollHeight;
+
+        //Requests the move from the relevant bots
         if (turnNum%2 ==0) {
             game = bot1.move(game);
         }
         else {
             game = bot2.move(game);
         }
+        //Updates board graphic
         board.position(game.fen());
-
+        
+        //Gets move just made in game and adds it to the table
         var history = game.history();
         var moveText = document.createTextNode(history[history.length-1])
-        if (history.length%2 ==0) {
-            var currentColumn = row.children[3]
-        }
-        else {
-            var currentColumn = row.children[1]
-        }
+        currentColumn = updateHighlight(game);
         currentColumn.appendChild(moveText);
-        updateHighlight(currentColumn); 
-
-        var movetable = document.getElementById("moves")
-        movetable.appendChild(row)
-        movetable.parentElement.scrollTop = movetable.parentElement.scrollHeight;
+        
 
         // exit if the game is over
         if (game.game_over()) return
@@ -141,12 +120,25 @@ function addMoveRow() {
     return row;
 }
 
-function updateHighlight(element) {
+function updateHighlight(currentGame) {
+    var history = currentGame.history();
+    var turnNum = Math.floor((history.length+1)/2);
+    var row = document.getElementById("row"+turnNum.toString());
     if (highlighted != null) {
         highlighted.setAttribute("class","");
     }
+    if (row != null) {
+    if (history.length%2 ==0) {
+        element = row.children[3];
+    }
+    else {
+        element = row.children[1];
+    }
     element.setAttribute("class","highlighted");
     highlighted = element;
+    return element;
+    }
+    return null;
 
 }
     
