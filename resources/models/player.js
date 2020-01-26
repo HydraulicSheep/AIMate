@@ -1,0 +1,14 @@
+
+class player  {
+
+
+    display() {
+
+    }
+
+    move() {
+
+
+    }
+
+}

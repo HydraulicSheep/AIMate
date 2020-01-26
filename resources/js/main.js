@@ -4,6 +4,8 @@ var run = false;
 var displayGame = game;
 var moveStack = [];
 var highlighted = null;
+var bot1;
+var bot2;
 
 
 function pauseButton () {
@@ -61,87 +63,91 @@ function play() {
             displayGame.move(moveStack.pop());
             board.position(displayGame.fen())
             console.log("Pushing move from stack");
-            if (highlighted != null) {
-                highlighted.setAttribute("class","");
-            }
             var history = displayGame.history();
             var turnNum = Math.round(history.length/2);
             var row = document.getElementById("row"+turnNum.toString());
             if (history.length%2 ==0) {
-                highlighted = row.children[3]
+                updateHighlight(row.children[3]);
             }
             else {
-                highlighted = row.children[1]
+                updateHighlight(row.children[1]);
             }
-            highlighted.setAttribute("class","highlighted")
         }
         else {
-            makeRandomMove();
+            makeMove();
         }
         window.setTimeout(play, 500);
     }
 }
 
-function makeRandomMove () {
+function makeMove() {
         var history = game.history();
-        var possibleMoves = game.moves();
         var turnNum = Math.floor(history.length/2)+1;
         var row = document.getElementById("row"+turnNum.toString());
         if (row == null) {
-            var col = document.createElement("td");
-            row = document.createElement("tr")
-            row.setAttribute("id","row"+turnNum.toString())
-            if (turnNum%2 ==0) {
-                row.setAttribute("class","even")
-            }
-            else {
-                row.setAttribute("class","odd")
-            }
-            var node = document.createTextNode(turnNum.toString()+".");
-            col.appendChild(node);
-            row.appendChild(col);
-    
-            var white = document.createElement("td");
-            //white.setAttribute("class","white")
-            row.appendChild(white);
-            row.appendChild(document.createElement("td"));
-    
-            var black = document.createElement("td");
-            //black.setAttribute("class","black")
-            row.appendChild(black);
-            row.appendChild(document.createElement("td"));
+            row = addMoveRow()
         }
-        
-        
-        // exit if the game is over
-        if (game.game_over()) return
     
-        var randomIdx = Math.floor(Math.random() * possibleMoves.length)
-        game.move(possibleMoves[randomIdx])
-        board.position(game.fen())
-    
-    
+        if (turnNum%2 ==0) {
+            game = bot1.move(game);
+        }
+        else {
+            game = bot2.move(game);
+        }
+        board.position(game.fen());
+
         var history = game.history();
-        if (history.length>0) {
-            var node2 = document.createTextNode(history[history.length-1])
-           
-            if (history.length%2 ==0) {
-                var col2 = row.children[3]
-            }
-            else {
-                var col2 = row.children[1]
-            }
-            col2.appendChild(node2);
-            if (highlighted != null) {
-                highlighted.setAttribute("class","");
-            }
-            
-            col2.setAttribute("class","highlighted");
-            highlighted = col2;
+        var moveText = document.createTextNode(history[history.length-1])
+        if (history.length%2 ==0) {
+            var currentColumn = row.children[3]
         }
+        else {
+            var currentColumn = row.children[1]
+        }
+        currentColumn.appendChild(moveText);
+        updateHighlight(currentColumn); 
+
         var movetable = document.getElementById("moves")
         movetable.appendChild(row)
         movetable.parentElement.scrollTop = movetable.parentElement.scrollHeight;
+
+        // exit if the game is over
+        if (game.game_over()) return
+}
+
+function addMoveRow() {
+    var history = game.history();
+    var turnNum = Math.floor(history.length/2)+1;
+    var col = document.createElement("td");
+    row = document.createElement("tr")
+    row.setAttribute("id","row"+turnNum.toString())
+    if (turnNum%2 ==0) {
+        row.setAttribute("class","even")
+    }
+    else {
+        row.setAttribute("class","odd")
+    }
+    var node = document.createTextNode(turnNum.toString()+".");
+    col.appendChild(node);
+    row.appendChild(col);
+
+    var white = document.createElement("td");
+    row.appendChild(white);
+    row.appendChild(document.createElement("td"));
+
+    var black = document.createElement("td");
+    row.appendChild(black);
+    row.appendChild(document.createElement("td"));
+    return row;
+}
+
+function updateHighlight(element) {
+    if (highlighted != null) {
+        highlighted.setAttribute("class","");
+    }
+    element.setAttribute("class","highlighted");
+    highlighted = element;
+
 }
     
 function init() {
@@ -155,6 +161,8 @@ var config = {
 }
 
 function start() {
+    bot1 = new randomBot(game);
+    bot2 = new randomBot(game);
     var overLay = document.getElementById("boardInfo");
     overLay.style.display = "none";
     var controls = document.getElementById("controls");
