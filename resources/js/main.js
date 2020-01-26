@@ -6,6 +6,7 @@ var moveStack = [];
 var highlighted = null;
 var bot1;
 var bot2;
+const BotTypes = Object.freeze({"random":1, "minimax":2, "neural":3});
 
 
 function pauseButton () {
@@ -156,8 +157,8 @@ var config = {
 }
 
 function start() {
-    bot2 = new randomBot(game);
-    bot1 = new captureBot(game);
+    bot2 = new randomBot(2);
+    bot1 = new pushBot(1);
     var overLay = document.getElementById("boardInfo");
     overLay.style.display = "none";
     var controls = document.getElementById("controls");

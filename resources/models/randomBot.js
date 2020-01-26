@@ -2,8 +2,8 @@
 
 class randomBot extends player {
 
-    constructor() {
-        super();
+    constructor(id) {
+        super(id,BotTypes.random);
     }
 
     move(game) {
