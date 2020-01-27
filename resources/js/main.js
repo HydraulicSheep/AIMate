@@ -132,19 +132,33 @@ function updateHighlight(currentGame) {
     var history = currentGame.history();
     var turnNum = Math.floor((history.length+1)/2);
     var row = document.getElementById("row"+turnNum.toString());
+    
     if (highlighted != null) {
         highlighted.setAttribute("class","");
     }
-    if (row != null) {
     if (history.length%2 ==0) {
-        element = row.children[3];
+        document.getElementById("bot1").style.backgroundColor = "grey";
+        document.getElementById("bot2").style.backgroundColor = "";
     }
-    else {
+    else{
+        document.getElementById("bot2").style.backgroundColor = "grey";
+        document.getElementById("bot1").style.backgroundColor = "";
+
+    }
+
+    if (row != null) {
+        if (history.length%2 ==0) {
+            element = row.children[3];
+            console.log("Running 0 path")
+        
+        }
+        else {
         element = row.children[1];
-    }
-    element.setAttribute("class","highlighted");
-    highlighted = element;
-    return element;
+        
+        }
+        element.setAttribute("class","highlighted");
+        highlighted = element;
+        return element;
     }
     return null;
 
