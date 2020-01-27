@@ -18,6 +18,8 @@ class choiceTable {
         for (move of this.moves) {
             result.appendChild(document.createTextNode(move['san']+" "));
         }
+        result.appendChild(document.createElement("br"));
+        result.appendChild(document.createElement("br"));
         return result;
     }
 }
