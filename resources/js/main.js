@@ -34,6 +34,7 @@ function stepBack () {
         moveStack.push(displayGame.undo())
         board.position(displayGame.fen())
         updateHighlight(displayGame);
+        display(displayGame);
     }
 }
 
@@ -53,10 +54,13 @@ function play() {
             board.position(displayGame.fen())
             console.log("Pushing move from stack");
             updateHighlight(displayGame);
+            display(displayGame);
         }
         else {
             makeMove();
+            display(game);
         }
+        
         window.setTimeout(play, 500);
     }
 }
@@ -145,6 +149,18 @@ function updateHighlight(currentGame) {
     return null;
 
 }
+
+function display(givenGame) {
+    var history = givenGame.history();
+    if (history.length%2 ==0) {
+        console.log("Displaying bot1 info");
+        bot1.display(givenGame)
+    }
+    else {
+        bot2.display(givenGame)
+    }
+
+}
     
 function init() {
 var config = {
@@ -155,6 +171,7 @@ var config = {
     board = ChessBoard('myBoard', config);
     $(window).resize(board.resize);
 }
+
 
 function start() {
     bot2 = new randomBot(2);
