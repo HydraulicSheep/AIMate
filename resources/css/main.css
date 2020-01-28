@@ -12,11 +12,19 @@ i {
     padding: 0px 10px 0px 10px;
 }
 
+.navbar {
+  height: 5vh;
+}
+
 .column {
-    height: 100vh;
+    height: 95vh;
     text-align: center;
     float: left;
     width: 33.33%;
+}
+
+.highlightsquare {
+  background-color: blue;
 }
 
 

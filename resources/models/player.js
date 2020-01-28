@@ -26,6 +26,8 @@ class player  {
 
     }
 
+    
+
     move(game) {
         var result = this.think(game);
         game.move(result.choice);
@@ -33,7 +35,7 @@ class player  {
     }
 
     randomMove(game) {
-        var possibleMoves = game.moves();
+        var possibleMoves = game.moves({ verbose: true });
         var randomIndex = Math.floor(Math.random() * possibleMoves.length)
         return possibleMoves[randomIndex];
     }

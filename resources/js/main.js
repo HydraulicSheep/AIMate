@@ -1,4 +1,5 @@
 var board = null
+var $board = $('#myBoard')
 var game = new Chess()
 var run = false;
 var displayGame = game;
@@ -6,7 +7,10 @@ var moveStack = [];
 var highlighted = null;
 var bot1;
 var bot2;
+var useAnimation = true;
+var $board;
 const BotTypes = Object.freeze({"random":1, "minimax":2, "neural":3});
+var squareToHighlight = null;
 
 $(document).on("keydown", function (e) {
     console.log(e.which);
@@ -40,7 +44,9 @@ function stepBack () {
             pauseButton();
         }
         moveStack.push(displayGame.undo())
-        board.position(displayGame.fen())
+        useAnimation = false;
+        board.position(displayGame.fen(),useAnimation)
+        useAnimation = true;
         updateHighlight(displayGame);
         display(displayGame);
     }
@@ -51,7 +57,9 @@ function stepForward () {
         pauseButton();
     }
     run = true;
+    useAnimation = false;
     play();
+    useAnimation = true;
     run = false;
 }
 
@@ -59,7 +67,7 @@ function play() {
     if (run) {
         if (moveStack.length>0) {
             displayGame.move(moveStack.pop());
-            board.position(displayGame.fen())
+            board.position(displayGame.fen(),useAnimation)
             console.log("Pushing move from stack");
             updateHighlight(displayGame);
             display(displayGame);
@@ -90,14 +98,16 @@ function makeMove() {
         console.log(history.length);
         if (history.length%2 ==0) {
             console.log("bot 1 move");
-            game = bot1.move(game);
+            move = bot1.think(game);
+            game.move(move.choice)
         }
         else {
-            game = bot2.move(game);
-            console.log("bot 2 move");
+            move = bot2.think(game);
+            game.move(move.choice)
         }
-        //Updates board graphic
-        board.position(game.fen());
+        squareToHighlight = move.choice.to
+        board.position(game.fen(),useAnimation);
+        
         
         //Gets move just made in game and adds it to the table
         var history = game.history();
@@ -183,16 +193,26 @@ function display(givenGame) {
     }
 
 }
+ 
     
 function init() {
 var config = {
         pieceTheme: 'libraries/chessboardjs/img/chesspieces/wikipedia/{piece}.png',
-        position: 'start'
+        position: 'start',
+        onMoveEnd: onMoveEnd,
     }
 
     board = ChessBoard('myBoard', config);
     $(window).resize(board.resize);
 }
+
+function onMoveEnd () {
+    console.log('Move end');
+    $board = $('#myBoard');
+    square = $board.find(('.square-' + squareToHighlight))
+    console.log(square);
+    square.addClass('highlightsquare')
+  }
 
 
 function start() {
