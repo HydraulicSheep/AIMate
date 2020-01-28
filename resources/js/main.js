@@ -8,6 +8,14 @@ var bot1;
 var bot2;
 const BotTypes = Object.freeze({"random":1, "minimax":2, "neural":3});
 
+$(document).on("keydown", function (e) {
+    console.log(e.which);
+    switch (e.which) {
+        case 32: pauseButton(); break;
+        case 37: stepBack(); break;
+        case 39: stepForward(); break;
+    }
+});
 
 function pauseButton () {
     if (run) {
