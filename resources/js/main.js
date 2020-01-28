@@ -10,7 +10,6 @@ var bot2;
 var useAnimation = true;
 var $board;
 const BotTypes = Object.freeze({"random":1, "minimax":2, "neural":3});
-var squareToHighlight = null;
 
 $(document).on("keydown", function (e) {
     console.log(e.which);
@@ -98,14 +97,11 @@ function makeMove() {
         console.log(history.length);
         if (history.length%2 ==0) {
             console.log("bot 1 move");
-            move = bot1.think(game);
-            game.move(move.choice)
+            game = bot1.move(game);
         }
         else {
-            move = bot2.think(game);
-            game.move(move.choice)
+            game = bot2.move(game);
         }
-        squareToHighlight = move.choice.to
         board.position(game.fen(),useAnimation);
         
         
@@ -164,6 +160,30 @@ function updateHighlight(currentGame) {
 
     }
 
+    $board = $('#myBoard');
+    $board.find('.' + 'square-55d63').removeClass('highlightwhitefrom')
+    $board.find('.' + 'square-55d63').removeClass('highlightwhiteto')
+    $board.find('.' + 'square-55d63').removeClass('highlightblackfrom')
+    $board.find('.' + 'square-55d63').removeClass('highlightblackto')
+    if (history.length > 0) {
+        lastMove = currentGame.undo({ verbose: true })
+        currentGame.move(lastMove)
+        if ($board.find(('.square-' + lastMove.to)).hasClass('white-1e1d7')) {
+            $board.find(('.square-' + lastMove.to)).addClass('highlightwhiteto')
+        }
+        else {
+            $board.find(('.square-' + lastMove.to)).addClass('highlightblackto')
+        }
+        if ($board.find(('.square-' + lastMove.from)).hasClass('white-1e1d7')) {
+            $board.find(('.square-' + lastMove.from)).addClass('highlightwhitefrom')
+        }
+        else {
+            $board.find(('.square-' + lastMove.from)).addClass('highlightblackfrom')
+        }
+        
+    }
+    
+
     if (row != null) {
         if (history.length%2 ==0) {
             element = row.children[3];
@@ -208,10 +228,7 @@ var config = {
 
 function onMoveEnd () {
     console.log('Move end');
-    $board = $('#myBoard');
-    square = $board.find(('.square-' + squareToHighlight))
-    console.log(square);
-    square.addClass('highlightsquare')
+    
   }
 
 
