@@ -2,6 +2,7 @@ class pushBot extends player {
 
     constructor(id) {
         super(id,BotTypes.random);
+        this.description = "A bot that tries to push a piece towards the other side of the board or failing that, makes a random move.";
     }
     
     think(game) {

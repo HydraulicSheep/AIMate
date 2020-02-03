@@ -4,6 +4,7 @@ class randomBot extends player {
 
     constructor(id) {
         super(id,BotTypes.random);
+        this.description = "A bot that moves randomly.";
     }
 
     think(game) {

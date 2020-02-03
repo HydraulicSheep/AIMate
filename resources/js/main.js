@@ -270,8 +270,21 @@ function start() {
     var bot2parent = bot2e.parentElement;
     bot1parent.removeChild(bot1e);
     bot2parent.removeChild(bot2e);
+
     bot1parent.appendChild(document.createTextNode(bot1text))
+    
+    var description1 = document.createElement("div");
+    description1.setAttribute("class","description")
+    description1.appendChild(document.createElement("br"));
+    description1.appendChild(document.createTextNode(bot1.description))
+    bot1parent.appendChild(description1)
+
     bot2parent.appendChild(document.createTextNode(bot2text))
+    var description2 = document.createElement("div");
+    description2.setAttribute("class","description")
+    description2.appendChild(document.createElement("br"));
+    description2.appendChild(document.createTextNode(bot2.description))
+    bot2parent.appendChild(description2)
 
     var overLay = document.getElementById("boardInfo");
     overLay.style.display = "none";

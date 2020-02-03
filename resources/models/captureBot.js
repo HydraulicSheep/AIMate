@@ -2,6 +2,7 @@ class captureBot extends player {
 
     constructor(id) {
         super(id,BotTypes.random);
+        this.description = "A bot that tries to capture or failing that, makes a random move.";
     }
 
     think(game) {
