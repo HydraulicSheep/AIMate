@@ -75,6 +75,19 @@ th {
   font-style: italic;
 }
 
+.thoughtchoice {
+  float: left;
+  border-style: solid;
+  border-width: 1px;
+  padding: 1%;
+}
+
+.tableHeader {
+  float: none;
+  padding: 1%;
+  border-style: solid;
+}
+
 
   ul {
     list-style-type: none;

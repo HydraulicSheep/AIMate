@@ -11,15 +11,26 @@ class choiceTable {
     
     
     render() {
-        var result = document.createElement("div");
-        result.appendChild(document.createTextNode(this.title));
+        var table = document.createElement("div");
+        table.setAttribute("style","width: 50%")
+        var header = document.createElement("div");
+        header.setAttribute("class","tableHeader")
+        header.appendChild(document.createTextNode(this.title));
+        table.appendChild(header)
+        var moves = document.createElement("div");
         var move;
-        result.appendChild(document.createElement("br"));
         for (move of this.moves) {
-            result.appendChild(document.createTextNode(move['san']+" "));
+            var a = document.createElement("div");
+            var text = move['san'];
+            a.appendChild(document.createTextNode(text));
+            a.setAttribute("class","thoughtchoice")
+            moves.appendChild(a);
         }
-        result.appendChild(document.createElement("br"));
-        result.appendChild(document.createElement("br"));
-        return result;
+        var clearance = document.createElement("div")
+        clearance.setAttribute("style","clear: both")
+        moves.appendChild(clearance)
+        table.appendChild(moves);
+        
+        return table;
     }
 }
