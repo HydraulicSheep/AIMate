@@ -28,6 +28,7 @@ class choiceTable {
             else {
                 a.setAttribute("class","thoughtchoiceright")
             }
+            $(a).hover(mouseon,mouseoff);
             moves.appendChild(a);
         }
         var clearance = document.createElement("div")
@@ -37,4 +38,6 @@ class choiceTable {
         
         return table;
     }
+
+    
 }

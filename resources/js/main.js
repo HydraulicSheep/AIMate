@@ -9,6 +9,8 @@ var bot1;
 var bot2;
 var useAnimation = true;
 var $board;
+var highlightTo = null;
+var highlightFrom = null;
 const BotTypes = Object.freeze({"random":1, "minimax":2, "neural":3});
 
 $(document).on("keydown", function (e) {
@@ -103,7 +105,7 @@ function makeMove() {
             game = bot2.move(game);
         }
         board.position(game.fen(),useAnimation);
-        
+        displayGame = game;
         
         //Gets move just made in game and adds it to the table
         var history = game.history();
@@ -159,7 +161,11 @@ function updateHighlight(currentGame) {
         document.getElementById("bot1").style.backgroundColor = "";
 
     }
-
+    if (highlightTo != null) {
+    highlightTo.css("background-color","")
+    highlightFrom.css("background-color","")
+    }
+    
     $board = $('#myBoard');
     $board.find('.' + 'square-55d63').removeClass('highlightwhitefrom')
     $board.find('.' + 'square-55d63').removeClass('highlightwhiteto')
@@ -293,4 +299,48 @@ function start() {
     updateHighlight(game);
     display(game);
     window.setTimeout(pauseButton, 500);
+}
+
+function mouseon(tile) {
+    $board = $('#myBoard');
+    $(tile.target).css('background-color','green');
+    var text = tile.target.textContent
+    var gameClone = new Chess()
+    gameClone.load_pgn(displayGame.pgn());
+    var attempt = gameClone.move(text);
+    if (attempt != null) {   
+        var squareto = $board.find(('.square-' + attempt.to))
+        highlightTo = squareto
+        squareto.css("background-color","blue");
+        var squarefrom = $board.find(('.square-' + attempt.from))
+        highlightFrom = squarefrom
+        squarefrom.css("background-color","yellow");
+    }
+    else {
+
+    }
+}
+
+function mouseoff(tile) {
+    $(tile.target).css('background-color','');
+    var text = tile.target.textContent
+    var gameClone = new Chess()
+    gameClone.load_pgn(displayGame.pgn());
+    var attempt = gameClone.move(text);
+    if (attempt != null) {   
+        var squareto = $board.find(('.square-' + attempt.to))
+        
+        squareto.css("background-color","");
+        var squarefrom = $board.find(('.square-' + attempt.from))
+        
+        squarefrom.css("background-color","");
+    }
+    else {
+        gameClone.undo()
+        attempt = gameClone.move(text);
+        var squareto = $board.find(('.square-' + attempt.to))
+        squareto.css("background-color","");
+        var squarefrom = $board.find(('.square-' + attempt.from))
+        squarefrom.css("background-color","");
+    }
 }
