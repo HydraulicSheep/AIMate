@@ -75,7 +75,14 @@ th {
   font-style: italic;
 }
 
-.thoughtchoice {
+.thoughtchoiceleft {
+  float: right;
+  border-style: solid;
+  border-width: 1px;
+  padding: 1%;
+}
+
+.thoughtchoiceright {
   float: left;
   border-style: solid;
   border-width: 1px;
@@ -86,6 +93,16 @@ th {
   float: none;
   padding: 1%;
   border-style: solid;
+}
+
+.leftTable {
+  width: 80%;
+  float: right;
+}
+
+.rightTable {
+  width: 80%;
+  float:left;
 }
 
 

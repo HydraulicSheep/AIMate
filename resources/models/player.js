@@ -19,7 +19,14 @@ class player  {
         var x;
         for (x of process.elements) {
             console.log("Handling one element");
-            newInfo.appendChild(x.render())
+            var element = x.render(this.id)
+            if (this.id == 1) {
+                element.setAttribute("class","leftTable")
+            }
+            else {
+                element.setAttribute("class","rightTable")
+            }
+            newInfo.appendChild(element)
         }
         column.appendChild(newInfo);
         

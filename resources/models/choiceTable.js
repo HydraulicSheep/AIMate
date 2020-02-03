@@ -10,9 +10,8 @@ class choiceTable {
     }
     
     
-    render() {
+    render(id) {
         var table = document.createElement("div");
-        table.setAttribute("style","width: 50%")
         var header = document.createElement("div");
         header.setAttribute("class","tableHeader")
         header.appendChild(document.createTextNode(this.title));
@@ -23,7 +22,12 @@ class choiceTable {
             var a = document.createElement("div");
             var text = move['san'];
             a.appendChild(document.createTextNode(text));
-            a.setAttribute("class","thoughtchoice")
+            if (id == 1) {
+                a.setAttribute("class","thoughtchoiceleft")
+            }
+            else {
+                a.setAttribute("class","thoughtchoiceright")
+            }
             moves.appendChild(a);
         }
         var clearance = document.createElement("div")
