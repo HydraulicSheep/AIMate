@@ -233,11 +233,51 @@ function onMoveEnd () {
 
 
 function start() {
-    bot2 = new randomBot(2);
-    bot1 = new pushBot(1);
+    //Reads the dropdowns and gets the selected values
+    var bot1e = document.getElementById('bot1selector');
+    var bot2e = document.getElementById('bot2selector');
+    var bot1string = bot1e.options[bot1e.selectedIndex].value;
+    var bot2string = bot2e.options[bot2e.selectedIndex].value;
+
+    //Instantiates bots
+    switch (bot1string) {
+        case 'randomBot':
+            bot1 = new randomBot(1);
+            break;
+        case 'pushBot':
+            bot1 = new pushBot(1);
+            break;
+        case 'captureBot':
+            bot1 = new captureBot(1);
+            break;
+    }
+    switch (bot2string) {
+        case 'randomBot':
+            bot2 = new randomBot(2);
+            break;
+        case 'pushBot':
+            bot2 = new pushBot(2);
+            break;
+        case 'captureBot':
+            bot2 = new captureBot(2);
+            break;
+    }
+
+    //Removes the dropdowns and replaces them with the selecte bot names
+    var bot1text = bot1e.options[bot1e.selectedIndex].text;
+    var bot2text = bot2e.options[bot2e.selectedIndex].text;
+    var bot1parent = bot1e.parentElement;
+    var bot2parent = bot2e.parentElement;
+    bot1parent.removeChild(bot1e);
+    bot2parent.removeChild(bot2e);
+    bot1parent.appendChild(document.createTextNode(bot1text))
+    bot2parent.appendChild(document.createTextNode(bot2text))
+
     var overLay = document.getElementById("boardInfo");
     overLay.style.display = "none";
     var controls = document.getElementById("controls");
     controls.style.display = "inline";
-    pauseButton();
+    updateHighlight(game);
+    display(game);
+    window.setTimeout(pauseButton, 500);
 }
