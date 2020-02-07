@@ -55,6 +55,7 @@ class player  {
             console.log("Equals null");
             process = this.think(game);
         }
+        console.log("Choice"+process.choice['san']);
         game.move(process.choice);
         return game;
     }

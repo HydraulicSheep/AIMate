@@ -255,6 +255,9 @@ function start() {
         case 'captureBot':
             bot1 = new captureBot(1);
             break;
+        case 'pointsBot':
+            bot1 = new pointsBot(1);
+            break;
     }
     switch (bot2string) {
         case 'randomBot':
@@ -265,6 +268,9 @@ function start() {
             break;
         case 'captureBot':
             bot2 = new captureBot(2);
+            break;
+        case 'pointsBot':
+            bot2 = new pointsBot(2);
             break;
     }
 
