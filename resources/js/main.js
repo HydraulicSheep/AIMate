@@ -65,6 +65,8 @@ function stepForward () {
 }
 
 function play() {
+    // exit if the game is over  
+    if (game.game_over()) return
     if (run) {
         if (moveStack.length>0) {
             displayGame.move(moveStack.pop());
@@ -111,11 +113,7 @@ function makeMove() {
         var history = game.history();
         var moveText = document.createTextNode(history[history.length-1])
         currentColumn = updateHighlight(game);
-        currentColumn.appendChild(moveText);
-        
-
-        // exit if the game is over
-        if (game.game_over()) return
+        currentColumn.appendChild(moveText);          
 }
 
 function addMoveRow() {
@@ -333,12 +331,4 @@ function mouseoff(tile) {
         
         squarefrom.css("background-color","");
     }
-    /*else {
-        gameClone.undo()
-        attempt = gameClone.move(text);
-        var squareto = $board.find(('.square-' + attempt.to))
-        squareto.css("background-color","");
-        var squarefrom = $board.find(('.square-' + attempt.from))
-        squarefrom.css("background-color","");
-    }*/
 }
