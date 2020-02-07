@@ -153,12 +153,12 @@ function updateHighlight(currentGame) {
         highlighted.setAttribute("class","");
     }
     if (history.length%2 ==0) {
-        document.getElementById("bot1").style.backgroundColor = "grey";
-        document.getElementById("bot2").style.backgroundColor = "";
+        document.getElementById("bot1").style.opacity = "100%";
+        document.getElementById("bot2").style.opacity = "10%";
     }
     else{
-        document.getElementById("bot2").style.backgroundColor = "grey";
-        document.getElementById("bot1").style.backgroundColor = "";
+        document.getElementById("bot2").style.opacity = "100%";
+        document.getElementById("bot1").style.opacity = "10%";
 
     }
     if (highlightTo != null) {
@@ -308,16 +308,14 @@ function mouseon(tile) {
     var gameClone = new Chess()
     gameClone.load_pgn(displayGame.pgn());
     var attempt = gameClone.move(text);
-    if (attempt != null) {   
+    element = $(tile.target)
+    if (attempt != null && ((element.hasClass("thoughtchoiceleft") && game.turn()=='w') || (element.hasClass("thoughtchoiceright") && game.turn()=='b'))) {   
         var squareto = $board.find(('.square-' + attempt.to))
         highlightTo = squareto
         squareto.css("background-color","blue");
         var squarefrom = $board.find(('.square-' + attempt.from))
         highlightFrom = squarefrom
         squarefrom.css("background-color","yellow");
-    }
-    else {
-
     }
 }
 
@@ -335,12 +333,12 @@ function mouseoff(tile) {
         
         squarefrom.css("background-color","");
     }
-    else {
+    /*else {
         gameClone.undo()
         attempt = gameClone.move(text);
         var squareto = $board.find(('.square-' + attempt.to))
         squareto.css("background-color","");
         var squarefrom = $board.find(('.square-' + attempt.from))
         squarefrom.css("background-color","");
-    }
+    }*/
 }

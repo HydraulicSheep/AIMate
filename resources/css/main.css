@@ -96,12 +96,12 @@ th {
 }
 
 .leftTable {
-  width: 80%;
+  width: 100%;
   float: right;
 }
 
 .rightTable {
-  width: 80%;
+  width: 100%;
   float:left;
 }
 
