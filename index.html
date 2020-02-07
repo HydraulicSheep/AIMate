@@ -39,19 +39,17 @@
         </p>
     </div>
     <div class="column" style="margin: auto;max-height: 77vh;">
-      <div id ="boardContainer" style="background-color: white;">
-        <div id="myBoard" style="width: 100%; margin: auto;">
+      <div id="boardInfo">
+        <div id='overlaytext'>
+          <br></br>
+          Select Bots from the dropdown menus and press start
+          <br></br>
+        </div>
+        <button type="button" onclick="start()">Start</button> 
+      </div>
+        <div id="myBoard" style="width: 95%;">
           <script>init()</script>
         </div>
-        <div id="boardInfo">
-          <div id='overlaytext'>
-            <br></br>
-            Select Bots from the dropdown menus and press start
-            <br></br>
-          </div>
-          <button type="button" onclick="start()">Start</button> 
-        </div>
-      </div>
         <table style="padding-top: 10px;">
           <tr id = "controls">
             <th class="moveno"></th>

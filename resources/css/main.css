@@ -17,6 +17,7 @@ i {
 }
 
 .column {
+  position: relative;
     height: 95vh;
     text-align: center;
     float: left;
@@ -135,13 +136,19 @@ th {
   }
   
   #boardInfo {
-    background-color: rgba(70,130,180, 0.9);
+    background-color: rgba(70, 131, 180, 0.904);
     z-index: 1;
     width: 100%;
     height: 100%;
     position: absolute;
     top: 0;
     left: 0;
+  }
+
+  #myBoard {
+    margin: auto;
+    align-items: center;
+    position:relative;
   }
 
   #controls {
