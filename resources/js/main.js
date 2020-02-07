@@ -256,10 +256,16 @@ function start() {
             bot1 = new captureBot(1);
             break;
         case 'pointsBot':
-            bot1 = new pointsBot(1);
+            bot1 = new pointsBot(1,2);
             break;
         case 'greedyBot':
-            bot1 = new greedyBot(1);
+            bot1 = new greedyBot(1,2);
+            break;
+        case 'alphaBeta3':
+            bot1 = new alphaBeta(1,3);
+            break;
+        case 'alphaBeta2':
+            bot1 = new alphaBeta(1,2);
             break;
     }
     switch (bot2string) {
@@ -273,10 +279,16 @@ function start() {
             bot2 = new captureBot(2);
             break;
         case 'pointsBot':
-            bot2 = new pointsBot(2);
+            bot2 = new pointsBot(2,2);
             break;
         case 'greedyBot':
-            bot2 = new greedyBot(2);
+            bot2 = new greedyBot(2,2);
+            break;
+        case 'alphaBeta3':
+            bot2 = new alphaBeta(2,3);
+            break;
+        case 'alphaBeta2':
+            bot2 = new alphaBeta(2,2);
             break;
     }
 

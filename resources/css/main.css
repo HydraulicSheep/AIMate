@@ -106,6 +106,15 @@ th {
   float:left;
 }
 
+.orderedItem {
+  float: left;
+}
+
+.orderedList {
+  overflow: auto;
+  height: 15vh;
+}
+
 
   ul {
     list-style-type: none;

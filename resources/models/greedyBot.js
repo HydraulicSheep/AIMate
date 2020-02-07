@@ -1,8 +1,9 @@
 class greedyBot extends player {
 
-    constructor(id) {
+    constructor(id,depth) {
         super(id,BotTypes.random);
         this.description = "A bot that only cares about its own point total (traditional points system)";
+        this.depth = depth;
     }
     
     think(game) {

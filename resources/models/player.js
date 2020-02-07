@@ -34,10 +34,10 @@ class player  {
             console.log("Handling one element");
             var element = x.render(this.id)
             if (this.id == 1) {
-                element.setAttribute("class","leftTable")
+                element.className += " leftTable"
             }
             else {
-                element.setAttribute("class","rightTable")
+                element.className += " rightTable"
             }
             newInfo.appendChild(element)
         }

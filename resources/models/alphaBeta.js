@@ -1,15 +1,15 @@
-class pointsBot extends player {
+class alphaBeta extends player {
 
     constructor(id,depth) {
         super(id,BotTypes.random);
-        this.description = "A bot that maximises its points and minimizes enemy points (traditional points system)";
-        this.depth = depth;
+        this.description = "A bot that minmaxes points with alpha-beta pruning";
+        this.depth = depth
     }
     
     think(game) {
         var process = new thoughtProcess();
         var pointTree = new Tree("Moves",game);
-        this.minimax(pointTree.root,this.depth,true);
+        this.minimaxab(pointTree.root,this.depth,-200001,200001,true);
         pointTree.sortNodes();
         var choices = new orderedTable("Rankings",pointTree.root.children);
         process.choice = pointTree.root.children[0].move;
@@ -18,7 +18,7 @@ class pointsBot extends player {
 
     }
 
-    minimax(node,depth,ourside) {
+    minimaxab(node,depth,a,b,ourside) {
         if (depth == 0 /*|| is a terminal node*/) {
             node.score = this.scoreFunction(node.state);
             return node.score;
@@ -29,13 +29,17 @@ class pointsBot extends player {
         if (ourside) {
             value = -100000;
             for (x of node.children) {
-                value = Math.max(value,this.minimax(x,depth-1,false))
+                value = Math.max(value,this.minimaxab(x,depth-1,a,b,false))
+                a = Math.max(a,value)
+                if (a >= b) {break;}
             }
         }
         else {
-            value = 1000000;
+            value = 100000;
             for (x of node.children) {
-                value = Math.min(value,this.minimax(x,depth-1,true));
+                value = Math.min(value,this.minimaxab(x,depth-1,a,b,true));
+                b = Math.min(b,value)
+                if (a >= b) {break;}
             }
         }
         node.score = value;

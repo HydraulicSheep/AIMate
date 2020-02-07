@@ -7,13 +7,7 @@ class Tree {
 
     render(id) {
         var visualTree = document.createElement("div");
-        /*for (node of this.root.children) {
-            var a = document.createElement("div");
-            var text = "node.move['san'];"
-            a.appendChild(document.createTextNode(text));
-            visualTree.appendChild(a);
-        }*/
-        return visualTree;
+       
     }
 
     sortNodes() {
