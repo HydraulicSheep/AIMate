@@ -300,14 +300,15 @@ function start() {
 }
 
 function mouseon(tile) {
+    console.log('test')
     $board = $('#myBoard');
     $(tile.target).css('background-color','green');
-    var text = tile.target.textContent
-    var gameClone = new Chess()
-    gameClone.load_pgn(displayGame.pgn());
-    var attempt = gameClone.move(text);
     element = $(tile.target)
-    if (attempt != null && ((element.hasClass("thoughtchoiceleft") && game.turn()=='w') || (element.hasClass("thoughtchoiceright") && game.turn()=='b'))) {   
+    if ((element.hasClass("thoughtchoiceleft") && game.turn()=='w') || (element.hasClass("thoughtchoiceright") && game.turn()=='b')) {
+    var text = tile.target.textContent
+    var attempt = game.move(text);
+    game.undo();
+    if (attempt != null) {   
         var squareto = $board.find(('.square-' + attempt.to))
         highlightTo = squareto
         squareto.css("background-color","blue");
@@ -316,19 +317,10 @@ function mouseon(tile) {
         squarefrom.css("background-color","yellow");
     }
 }
+}
 
 function mouseoff(tile) {
     $(tile.target).css('background-color','');
-    var text = tile.target.textContent
-    var gameClone = new Chess()
-    gameClone.load_pgn(displayGame.pgn());
-    var attempt = gameClone.move(text);
-    if (attempt != null) {   
-        var squareto = $board.find(('.square-' + attempt.to))
-        
-        squareto.css("background-color","");
-        var squarefrom = $board.find(('.square-' + attempt.from))
-        
-        squarefrom.css("background-color","");
-    }
+    highlightTo.css("background-color","");
+    highlightFrom.css("background-color","");
 }

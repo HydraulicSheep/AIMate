@@ -12,6 +12,7 @@ class player  {
         var info = document.getElementById("thinking"+this.id);
         var column = document.getElementById("bot"+this.id);
         if (info != null) {
+            $(info).empty()
             column.removeChild(info);
         }
         var newInfo = document.createElement("div");
