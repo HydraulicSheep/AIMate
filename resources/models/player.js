@@ -4,11 +4,23 @@ class player  {
     constructor(id,type) {
         this.id = id;
         this.type = type;
+        this.processrecord = [];
     }
 
     display(game) {
-        var process = this.think(game);
-        
+        var process;
+        console.log("PROSSE: "+this.processrecord.length)
+        if (this.processrecord.length == Math.floor(game.history().length/2)) {
+            process = this.think(game);
+            this.processrecord.push(process);
+            console.log("Path 1")
+        }
+        else {
+            console.log("Path 2")
+            process = this.processrecord[Math.floor(game.history().length/2)]
+        }
+       
+
         var info = document.getElementById("thinking"+this.id);
         var column = document.getElementById("bot"+this.id);
         if (info != null) {
@@ -37,8 +49,13 @@ class player  {
     
 
     move(game) {
-        var result = this.think(game);
-        game.move(result.choice);
+        console.log("Length"+game.history().length);
+        var process = this.processrecord[Math.floor((game.history().length)/2)]
+        if (process == null) {
+            console.log("Equals null");
+            process = this.think(game);
+        }
+        game.move(process.choice);
         return game;
     }
 

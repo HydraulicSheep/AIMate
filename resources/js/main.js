@@ -208,6 +208,7 @@ function updateHighlight(currentGame) {
 
 function display(givenGame) {
     var history = givenGame.history();
+    console.log("History length: "+ history.length);
     if (history.length%2 ==0) {
         console.log("Displaying bot1 info");
         bot1.display(givenGame)
