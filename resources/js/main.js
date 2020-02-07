@@ -300,6 +300,7 @@ function start() {
     window.setTimeout(pauseButton, 500);
 }
 
+//Hover functions for the moves in choicetables
 function mouseon(tile) {
     console.log('test')
     $board = $('#myBoard');

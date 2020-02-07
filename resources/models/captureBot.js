@@ -11,6 +11,7 @@ class captureBot extends player {
         var process = new thoughtProcess();
         var all = new choiceTable("All Moves");
         var selected = new choiceTable("Capture Moves");
+        var final = new choiceTable("Random Selection");
         for (move of possibleMoves) {
             all.addMove(move);
             if (move['flags'].includes('c')||move['flags'].includes('e')) {
@@ -21,8 +22,10 @@ class captureBot extends player {
         if (process.choice == null) {
             process.setChoice(this.randomMove(game));
         }
+        final.addMove(process.choice);
         process.addElement(all);
         process.addElement(selected);
+        process.addElement(final);
         return process;
     }
 

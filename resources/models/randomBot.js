@@ -15,7 +15,7 @@ class randomBot extends player {
         for (move of possibleMoves) {
             all.addMove(move);
         }
-        var final = new choiceTable('Select Randomly');
+        var final = new choiceTable('Random Selection');
         process.choice = this.randomMove(game)
         final.addMove(process.choice);
         process.addElement(all);

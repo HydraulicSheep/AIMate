@@ -11,6 +11,7 @@ class pushBot extends player {
         var process = new thoughtProcess();
         var all = new choiceTable("All Moves");
         var selected = new choiceTable("Push Moves");
+        var final = new choiceTable("Random Selection");
         for (move of possibleMoves) {
             all.addMove(move);
             if ((game.turn() == 'w' && move['from'][1] < move['to'][1]) || (game.turn() == 'b' && move['from'][1] < move['to'][1])) {
@@ -21,8 +22,12 @@ class pushBot extends player {
         if (process.choice == null) {
             process.setChoice(this.randomMove(game));
         }
+        final.addMove(process.choice);
+        
         process.addElement(all);
         process.addElement(selected);
+        process.addElement(final);
+        
         return process;
 
     }
