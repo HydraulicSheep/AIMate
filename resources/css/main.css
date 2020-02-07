@@ -131,10 +131,6 @@ th {
     color: black;
   }
 
-  #boardContainer {
-    position: relative;
-  }
-  
   #boardInfo {
     background-color: rgba(70, 131, 180, 0.904);
     z-index: 1;
