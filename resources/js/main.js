@@ -258,6 +258,9 @@ function start() {
         case 'pointsBot':
             bot1 = new pointsBot(1);
             break;
+        case 'greedyBot':
+            bot1 = new greedyBot(1);
+            break;
     }
     switch (bot2string) {
         case 'randomBot':
@@ -271,6 +274,9 @@ function start() {
             break;
         case 'pointsBot':
             bot2 = new pointsBot(2);
+            break;
+        case 'greedyBot':
+            bot2 = new greedyBot(2);
             break;
     }
 

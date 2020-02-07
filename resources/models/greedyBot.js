@@ -1,8 +1,8 @@
-class pointsBot extends player {
+class greedyBot extends player {
 
     constructor(id) {
         super(id,BotTypes.random);
-        this.description = "A bot that maximises its points and minimizes enemy points (traditional points system)";
+        this.description = "A bot that only cares about its own point total (traditional points system)";
     }
     
     think(game) {
@@ -55,12 +55,6 @@ class pointsBot extends player {
                     case 'B': points +=3; break;
                     case 'R': points +=5; break;
                     case 'Q': points +=9; break;
-                    case 'p': points -=1; break;
-                    case 'n': points -=3; break;
-                    case 'b': points -=3; break;
-                    case 'r': points -=5; break;
-                    case 'q': points -=9; break;
-    
                 }
     
             }
@@ -75,11 +69,6 @@ class pointsBot extends player {
                     case 'b': points +=3; break;
                     case 'r': points +=5; break;
                     case 'q': points +=9; break;
-                    case 'P': points -=1; break;
-                    case 'N': points -=3; break;
-                    case 'B': points -=3; break;
-                    case 'R': points -=5; break;
-                    case 'Q': points -=9; break;
     
                 }
     
