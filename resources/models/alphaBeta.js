@@ -13,6 +13,7 @@ class alphaBeta extends player {
         pointTree.sortNodes();
         var choices = new orderedTable("Rankings",pointTree.root.children);
         process.choice = pointTree.root.children[0].move;
+        process.addElement(pointTree);
         process.addElement(choices);
         return process;
 
@@ -42,7 +43,7 @@ class alphaBeta extends player {
                 if (a >= b) {break;}
             }
         }
-        node.score = value;
+        node.updateScore(value);
         return value;
 
     }

@@ -48,4 +48,13 @@ class Node {
         }
     }
 
+    updateScore(value) {
+
+        this.score = value;
+        this.data['value'] = value
+        if (this.parent != null) {
+            this.parent.data['children'].push(this.data)
+        }
+    }
+
 }
