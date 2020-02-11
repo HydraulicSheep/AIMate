@@ -40,7 +40,7 @@ class pointsBot extends player {
             }
         }
         node.score = value;
-        node.data['value'] = Math.abs(value)
+        node.data['value'] = value
         if (node.parent != null) {
             node.parent.data['children'].push(node.data)
         }

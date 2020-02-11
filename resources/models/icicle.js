@@ -2,9 +2,10 @@
 function generateIcicle(data) {
 
 partition = data => {
+    //Evaluation that decides the width of the displayed boxes
     const root = d3.hierarchy(data)
-        .count()
-        .each(d => d.value += +d.data.value)
+        .count() //Counts the number of moves below each to give it a base score
+        .each(d => d.value += Math.abs(+d.data.value)) //Adds the actual move value to prioritise more significant moves
         .sort((a, b) => b.width - a.width || b.value - a.value);  
     return d3.partition()
         .size([width-1, height])
@@ -56,7 +57,7 @@ height = 975
 
   const tspan = text.append("tspan")
       .attr("fill-opacity", d => labelVisible(d) * 0.7)
-      .text(d => ` ${format(+d.data.value)}`);
+      .text(d => ` ${format(+d.data.value)}`); //Displays the move's score in each box
 
   cell.append("title")
       .text(d => `${d.ancestors().map(d => d.data.name).reverse().join("/")}\n${format(d.value)}`);
