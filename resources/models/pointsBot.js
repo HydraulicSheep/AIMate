@@ -3,7 +3,7 @@ class pointsBot extends player {
     constructor(id,depth) {
         super(id,BotTypes.random);
         this.description = "A bot that maximises its points and minimizes enemy points (traditional points system)";
-        this.depth = depth;
+        this.depth = 3;
     }
     
     think(game) {
@@ -13,6 +13,7 @@ class pointsBot extends player {
         pointTree.sortNodes();
         var choices = new orderedTable("Rankings",pointTree.root.children);
         process.choice = pointTree.root.children[0].move;
+        process.addElement(pointTree);
         process.addElement(choices);
         return process;
 
@@ -39,6 +40,10 @@ class pointsBot extends player {
             }
         }
         node.score = value;
+        node.data['value'] = Math.abs(value)
+        if (node.parent != null) {
+            node.parent.data['children'].push(node.data)
+        }
         return value;
 
     }
