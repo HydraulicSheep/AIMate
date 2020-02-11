@@ -3,7 +3,7 @@ class pointsBot extends player {
     constructor(id,depth) {
         super(id,BotTypes.random);
         this.description = "A bot that maximises its points and minimizes enemy points (traditional points system)";
-        this.depth = 3;
+        this.depth = depth;
     }
     
     think(game) {

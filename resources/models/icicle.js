@@ -3,7 +3,8 @@ function generateIcicle(data) {
 
 partition = data => {
     const root = d3.hierarchy(data)
-        .sum(d => Math.abs(d.value))
+        .count()
+        .each(d => d.value += +d.data.value)
         .sort((a, b) => b.width - a.width || b.value - a.value);  
     return d3.partition()
         .size([width-1, height])
@@ -55,7 +56,7 @@ height = 975
 
   const tspan = text.append("tspan")
       .attr("fill-opacity", d => labelVisible(d) * 0.7)
-      .text(d => ` ${format(d['value'])}`);
+      .text(d => ` ${format(+d.data.value)}`);
 
   cell.append("title")
       .text(d => `${d.ancestors().map(d => d.data.name).reverse().join("/")}\n${format(d.value)}`);
