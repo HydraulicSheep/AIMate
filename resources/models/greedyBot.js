@@ -13,6 +13,7 @@ class greedyBot extends player {
         this.minimax(pointTree.root,2,true);
         pointTree.sortNodes();
         process.choice = pointTree.root.children[0].move;
+        process.addElement(pointTree);
         return process;
 
     }
@@ -37,7 +38,7 @@ class greedyBot extends player {
                 value = Math.min(value,this.minimax(x,depth-1,true));
             }
         }
-        node.score = value;
+        node.updateScore(score);
         return value;
 
     }
