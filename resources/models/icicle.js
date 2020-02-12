@@ -66,8 +66,8 @@ height = 975
     focus = focus === p ? p = p.parent : p;
 
     root.each(d => d.target = {
-      x0: ((d.x0 - p.x0) / (p.x1 - p.x0) * width),
-      x1: ((d.x1 - p.x0) / (p.x1 - p.x0) * width),
+      x0: ((d.x0 - p.x0) / (p.x1 - p.x0)) * width,
+      x1: ((d.x1 - p.x0) / (p.x1 - p.x0)) * width,
       y0: d.y0 - p.y0,
       y1: d.y1 - p.y0
     });
@@ -81,11 +81,11 @@ height = 975
   }
   
   function rectWidth(d) {
-    return d.x1 - d.x0 - Math.min(1, (d.x1 - d.x0)/3);
+    return d.x1 - d.x0 - Math.min(1, (d.x1 - d.x0)/2);
   }
 
   function labelVisible(d) {
-    return d.x1 <= width && d.x0 >= 0 && d.x1 - d.x0 > 100;
+    return d.x1 <= width && d.x0 >= 0 && d.x1 - d.x0 > 80;
   }
 
 return svg.node()
