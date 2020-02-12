@@ -8,7 +8,7 @@ partition = data => {
         .each(d => d.value += Math.abs(+d.data.value)) //Adds the actual move value to prioritise more significant moves
         .sort((a, b) => b.width - a.width || b.value - a.value);  
     return d3.partition()
-        .size([width-1, height])
+        .size([width,height])
       (root);
   }
 
@@ -16,7 +16,7 @@ color = d3.scaleOrdinal(d3.quantize(d3.interpolateRainbow, data.children.length 
 
 format = d3.format(",d")
 
-width = 1200
+width = 2000
 
 height = 975
 
@@ -66,8 +66,8 @@ height = 975
     focus = focus === p ? p = p.parent : p;
 
     root.each(d => d.target = {
-      x0: (d.x0 - p.x0) / (p.x1 - p.x0) * height,
-      x1: (d.x1 - p.x0) / (p.x1 - p.x0) * height,
+      x0: ((d.x0 - p.x0) / (p.x1 - p.x0) * width),
+      x1: ((d.x1 - p.x0) / (p.x1 - p.x0) * width),
       y0: d.y0 - p.y0,
       y1: d.y1 - p.y0
     });
@@ -81,12 +81,11 @@ height = 975
   }
   
   function rectWidth(d) {
-    return d.x1 - d.x0 - Math.min(1, (d.x1 - d.x0) / 3);
+    return d.x1 - d.x0 - Math.min(1, (d.x1 - d.x0)/3);
   }
-  
 
   function labelVisible(d) {
-    return d.x1 <= width && d.x0 >= 0 && d.x1 - d.x0 > 80;
+    return d.x1 <= width && d.x0 >= 0 && d.x1 - d.x0 > 100;
   }
 
 return svg.node()
