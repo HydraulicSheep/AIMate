@@ -5,7 +5,7 @@ partition = data => {
     //Evaluation that decides the width of the displayed boxes
     const root = d3.hierarchy(data)
         .count() //Counts the number of moves below each to give it a base score
-        .each(d => d.value += Math.abs(+d.data.value)) //Adds the actual move value to prioritise more significant moves
+ //Adds the actual move value to prioritise more significant moves
         .sort((a, b) => b.width - a.width || b.value - a.value);  
     return d3.partition()
         .size([width,height])
@@ -48,7 +48,7 @@ height = 975
   const text = cell.append("text")
       .style("user-select", "none")
       .attr("pointer-events", "none")
-      .attr("x", 10)
+      .attr("x", 4)
       .attr("y", 40)
       .attr("fill-opacity", d => +labelVisible(d));
 
