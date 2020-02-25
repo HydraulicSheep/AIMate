@@ -4,7 +4,7 @@ function generateIcicle(data) {
 partition = data => {
     //Evaluation that decides the width of the displayed boxes
     const root = d3.hierarchy(data)
-        .count() //Counts the number of moves below each to give it a base score
+        .sum(d => Math.abs(d.value)) //Counts the number of moves below each to give it a base score
  //Adds the actual move value to prioritise more significant moves
         .sort((a, b) => b.width - a.width || b.value - a.value);  
     return d3.partition()

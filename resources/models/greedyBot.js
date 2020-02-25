@@ -9,11 +9,26 @@ class greedyBot extends player {
     think(game) {
         var process = new thoughtProcess();
         var pointTree = new Tree("Moves",game);
-        //var orderedTable = new
-        this.minimax(pointTree.root,2,true);
+        this.minimax(pointTree.root,this.depth,true);
         pointTree.sortNodes();
-        process.choice = pointTree.root.children[0].move;
+        var choices = new orderedTable("Rankings",pointTree.root.children);
+        var x = []
+        var c;
+        var s = pointTree.root.children[0].score
+        for (c of pointTree.root.children) {
+            if (c.score == s) {
+                x.push(c)
+            }
+            else {
+                break;
+            }
+        }
+
+        var index = Math.floor(Math.random()*(x.length-1))
+
+        process.choice = pointTree.root.children[index].move;
         process.addElement(pointTree);
+        process.addElement(choices);
         return process;
 
     }
@@ -38,7 +53,7 @@ class greedyBot extends player {
                 value = Math.min(value,this.minimax(x,depth-1,true));
             }
         }
-        node.updateScore(score);
+        node.updateScore(value);
         return value;
 
     }

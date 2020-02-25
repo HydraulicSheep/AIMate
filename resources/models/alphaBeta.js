@@ -12,7 +12,21 @@ class alphaBeta extends player {
         this.minimaxab(pointTree.root,this.depth,-200001,200001,true);
         pointTree.sortNodes();
         var choices = new orderedTable("Rankings",pointTree.root.children);
-        process.choice = pointTree.root.children[0].move;
+        var x = []
+        var c;
+        var s = pointTree.root.children[0].score
+        for (c of pointTree.root.children) {
+            if (c.score == s) {
+                x.push(c)
+            }
+            else {
+                break;
+            }
+        }
+
+        var index = Math.floor(Math.random()*(x.length-1))
+
+        process.choice = pointTree.root.children[index].move;
         process.addElement(pointTree);
         process.addElement(choices);
         return process;
