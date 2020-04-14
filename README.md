@@ -1,6 +1,8 @@
 # AIMate
 Educating about game theory, AI and Deep Learning by visualising chess-bot thinking
 
+Visit at: https://hydraulicsheep.github.io/AIMate/
+
 ## What is this?
 
 AIMate is a project that aims to demystify the thinking of 'artificial intelligence' through the widely-played game of chess.
